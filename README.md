@@ -11,6 +11,8 @@
 
 Strategy, briefs, calendars, writing, optimization, schema, repurposing, and full-site audits — all from slash commands. Dual-optimized for Google rankings (December 2025 Core Update) and AI citation platforms (ChatGPT, Perplexity, AI Overviews).
 
+![Blog commands demo](assets/blog-command-demo.gif)
+**Slash commands in action** inside Claude Code
 ---
 
 ## Quick Start
@@ -36,6 +38,9 @@ Windows (PowerShell):
 
 Restart Claude Code after installation to activate.
 
+![Blog write command demo](assets/blog-write-demo.gif)
+**/blog write** — generate a full blog post from a topic
+
 ## Commands
 
 | Command | Description |
@@ -52,14 +57,6 @@ Restart Claude Code after installation to activate.
 | `/blog repurpose <file>` | Repurpose for social, email, YouTube |
 | `/blog geo <file>` | AI citation readiness audit |
 | `/blog audit [directory]` | Full-site blog health assessment |
-
-## Demo
-
-![Blog write command demo](assets/blog-write-demo.gif)
-**/blog write** — generate a full blog post from a topic
-
-![Blog commands demo](assets/blog-command-demo.gif)
-**Slash commands in action** inside Claude Code
 
 ## Features
 
