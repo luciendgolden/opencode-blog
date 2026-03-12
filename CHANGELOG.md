@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **plugin.json**: `skills` array declaring all 14 skills (marketplace readiness per Anthropic plugin spec); `blog-chart` marked `user-invocable: false`
+
+### Changed
+- **README.md**: Removed broken `/plugin install claude-blog@AgriciDaniel` (not yet registered in marketplace); corrected Python badge `3.12+` → `3.11+`; added inline note clarifying `blog-chart` is internal
+- **docs/INSTALLATION.md**: Removed "Plugin Install (Recommended)" section with broken command; corrected Python `3.12+` → `3.11+` (aligns with `pyproject.toml >=3.11` and CI matrix)
+- **docs/INSTALLATION.md**: Added `blog-chart` to manual `mkdir` brace expansion (was missing from 13-skill list)
+- **CLAUDE.md**: Corrected Python version reference `3.12+` → `3.11+`
+
+### Fixed
+- **install.ps1**: Removed dead `$dirs` variable block (declared but never used; directories created by the `foreach` loop below it)
+
+### Security
+- Deleted `firebase-debug.log` (gitignored debug artifact); deleted stale remote branch `claude/review-plugin-testing-practices-eVVOU`
+
+---
+
+## [1.3.1] - 2026-03-06
+
+### Added
+- **SKILL.md**: `license`, `compatibility`, and `metadata` fields per Agent Skills spec (agentskills.io)
+- **plugin.json**: `version`, `homepage`, `license` fields
+- GitHub issue template and PR template (community health files)
+
+### Fixed
+- **install.ps1**: Updated paths for `skills/blog/` restructure (Windows installer was broken since v1.3.0)
+- **install.ps1**: Added `blog` skip in sub-skill loop to prevent double-copy
+
+---
+
 ## [1.3.0] - 2026-03-06
 
 ### Added

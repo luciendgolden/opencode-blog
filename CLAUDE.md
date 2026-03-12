@@ -15,7 +15,7 @@ claude-blog/
   CLAUDE.md                          # Project instructions (this file)
   .claude-plugin/plugin.json         # Plugin manifest (v1.3.1)
   .mcp.json                          # MCP server configuration
-  pyproject.toml                     # Python packaging (3.12+)
+  pyproject.toml                     # Python packaging (3.11+)
   skills/                            # 14 sub-skills (blog/ is the orchestrator)
     blog/SKILL.md                   # Main orchestrator, routing, scoring
       references/                   # 12 on-demand knowledge files
@@ -67,5 +67,5 @@ claude-blog/
 - Scripts must have docstrings, CLI interface, and JSON output
 - Follow kebab-case naming for all skill directories
 - Agents invoked via Task tool with `context: fork`, never via Bash
-- Python 3.12+ required; dependencies in pyproject.toml
+- Python 3.11+ required; dependencies in pyproject.toml
 - Test with `python -m pytest tests/` after changes
