@@ -14,11 +14,11 @@ description: >
   "blog outline", "seo check", "schema markup", "repurpose", "geo audit",
   "blog audit", "citation readiness".
 license: MIT
-compatibility: Requires Claude Code and Python 3.12+ for quality scoring
+compatibility: Requires Claude Code and Python 3.11+ for quality scoring
 metadata:
   author: AgriciDaniel
   version: "1.3.1"
-user-invocable: true
+user-invokable: true
 argument-hint: "[write|rewrite|analyze|brief|calendar|strategy|outline|seo-check|schema|repurpose|geo|audit] [topic-or-file]"
 allowed-tools:
   - Read

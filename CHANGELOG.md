@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **install.ps1**: Removed dead `$dirs` variable block (declared but never used; directories created by the `foreach` loop below it)
+- **skills/blog/SKILL.md**: Corrected `compatibility` field Python version `3.12+` → `3.11+`
+- **skills/blog/SKILL.md**: Corrected `user-invocable` → `user-invokable` (correct Agent Skills spec spelling)
+- **skills/blog-chart/SKILL.md**: Added `user-invokable: false` to match plugin.json declaration; corrected attribute spelling
 
 ### Security
 - Deleted `firebase-debug.log` (gitignored debug artifact); deleted stale remote branch `claude/review-plugin-testing-practices-eVVOU`
