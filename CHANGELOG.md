@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.2] - 2026-03-27
+
+### Fixed
+- **plugin.json**: Removed invalid `skills` array of objects that failed `claude plugin validate` (skills auto-discovered from `skills/` directory)
+- **Agent frontmatter**: Removed unsupported `context: fork` field from all 4 agents (blog-researcher, blog-writer, blog-seo, blog-reviewer) per plugin agent spec
+- **Version alignment**: Synced pyproject.toml version with plugin.json (was 1.5.0, now 1.6.2)
+
+### Added
+- **Marketplace support**: Created `.claude-plugin/marketplace.json` for self-hosted marketplace distribution (`/plugin marketplace add AgriciDaniel/claude-blog`)
+- **plugin.json `repository` field**: Source code URL for marketplace discoverability
+- **plugin.json `keywords` field**: 14 tags for marketplace search (blog, seo, content, writing, ai-citations, geo, aeo, eeat, etc.)
+
+## [1.6.0] - 2026-03-25
+
+### Added
+- **blog-notebooklm sub-skill**: Query NotebookLM for source-grounded research with 10 Python scripts and 2 reference docs
+- **blog-audio sub-skill**: Generate audio narration via Gemini TTS with 30 voice options, summary/full/dialogue modes, and 5 Python scripts
+
+### Fixed
+- Dynamic skill discovery in installers (fixes #8, fixes missing blog-notebooklm/blog-audio)
+- Replaced remaining em dashes in .gitattributes and requirements.txt
+- Updated "Claude Banana" reference to "Banana Claude" after upstream repo rename
+
 ## [1.5.0] - 2026-03-18
 
 ### Added
