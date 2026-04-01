@@ -37,6 +37,12 @@ claude-blog is a Claude Code skill ecosystem for creating, optimizing, and manag
 
 ## Quick Start
 
+**Plugin Install (Claude Code 1.0.33+):**
+
+```bash
+claude plugin install claude-blog@agricidaniel-blog
+```
+
 **One-command install (Unix/macOS):**
 
 ```bash
