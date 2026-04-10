@@ -19,7 +19,7 @@ claude-blog/
   pyproject.toml                     # Python packaging (3.11+)
   skills/                            # 22 sub-skills (blog/ is the orchestrator)
     blog/SKILL.md                   # Main orchestrator, routing, scoring
-      references/                   # 13 on-demand knowledge files
+      references/                   # 14 on-demand knowledge files
       templates/                    # 12 content templates
       scripts/                     # Python analysis scripts
     blog-write/SKILL.md            # Write new articles from scratch

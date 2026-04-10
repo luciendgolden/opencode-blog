@@ -164,7 +164,7 @@ claude-blog/
 ├── skills/
 │   ├── blog/                           # Main orchestrator
 │   │   ├── SKILL.md                    # Routes all 21 commands
-│   │   ├── references/                 # 13 on-demand reference docs
+│   │   ├── references/                 # 14 on-demand reference docs
 │   │   └── templates/                  # 12 content type templates
 │   ├── blog-write/SKILL.md            # Sub-skills (21 user-facing + 1 internal)
 │   ├── blog-rewrite/SKILL.md
