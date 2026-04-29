@@ -1,7 +1,5 @@
 # opencode-blog — AI Blog Creation for OpenCode
 
-![opencode-blog — AI-Powered Blog Creation](assets/header.jpeg)
-
 [![CI](https://github.com/AgriciDaniel/opencode-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/AgriciDaniel/opencode-blog/actions/workflows/ci.yml)
 [![GitHub release](https://img.shields.io/github/v/release/AgriciDaniel/opencode-blog)](https://github.com/AgriciDaniel/opencode-blog/releases/latest)
 ![OpenCode Skill Pack](https://img.shields.io/badge/OpenCode-Skill_Pack-blueviolet)
@@ -41,8 +39,6 @@ It ships as a self-contained pack of OpenCode primitives:
 ## Demo
 
 [Watch the Demo on YouTube](https://www.youtube.com/watch?v=AeLC4iutG8w)
-
-![Blog commands demo](assets/blog-command-demo.gif)
 
 ---
 
@@ -111,8 +107,6 @@ specialist subagents via the `task` tool. Sub-skills bundle workflow steps;
 references and templates are loaded with the `read` tool only when needed.
 
 ## Commands
-
-![Blog write command demo](assets/blog-write-demo.gif)
 
 | Command | Description |
 |---------|-------------|
