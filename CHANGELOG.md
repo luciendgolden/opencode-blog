@@ -44,7 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Google API integrations in existing workflows**: blog-seo-check (optional PSI/CrUX), blog-rewrite (NLP entity analysis), blog-geo (GSC performance), blog-researcher (YouTube video discovery).
 
 ### Fixed
-- **Plugin compliance**: Removed non-standard `allowed-tools` frontmatter field from all 22 SKILL.md files per Claude Code plugin specification. Only valid fields remain: name, description, user-invokable, argument-hint, compatibility, license, metadata.
+- **Plugin compliance**: Removed non-standard `allowed-tools` frontmatter field from all 22 SKILL.md files per OpenCode plugin specification. Only valid fields remain: name, description, user-invokable, argument-hint, compatibility, license, metadata.
 - **CLAUDE.md development rules**: Clarified SKILL.md frontmatter field requirements and reference file size guidelines.
 
 ## [1.6.2] - 2026-03-27
@@ -55,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Version alignment**: Synced pyproject.toml version with plugin.json (was 1.5.0, now 1.6.2)
 
 ### Added
-- **Marketplace support**: Created `.claude-plugin/marketplace.json` for self-hosted marketplace distribution (`/plugin marketplace add AgriciDaniel/claude-blog`)
+- **Marketplace support**: Created `.claude-plugin/marketplace.json` for self-hosted marketplace distribution (`/plugin marketplace add AgriciDaniel/opencode-blog`)
 - **plugin.json `repository` field**: Source code URL for marketplace discoverability
 - **plugin.json `keywords` field**: 14 tags for marketplace search (blog, seo, content, writing, ai-citations, geo, aeo, eeat, etc.)
 
@@ -122,7 +122,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub issue template and PR template (community health files)
 
 ### Changed
-- **README.md**: Removed broken `/plugin install claude-blog@AgriciDaniel` (not yet registered in marketplace); corrected Python badge `3.12+` → `3.11+`; added inline note clarifying `blog-chart` is internal
+- **README.md**: Removed broken `/plugin install opencode-blog@AgriciDaniel` (not yet registered in marketplace); corrected Python badge `3.12+` → `3.11+`; added inline note clarifying `blog-chart` is internal
 - **docs/INSTALLATION.md**: Removed "Plugin Install (Recommended)" section with broken command; corrected Python `3.12+` → `3.11+` (aligns with `pyproject.toml >=3.11` and CI matrix)
 - **docs/INSTALLATION.md**: Added `blog-chart` to manual `mkdir` brace expansion (was missing from 13-skill list)
 - **CLAUDE.md**: Corrected Python version reference `3.12+` → `3.11+`
@@ -201,7 +201,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Image density guidelines** by content type in visual-media.md
 
 ### Changed
-- claude-blog is now fully self-contained, no external skill dependencies required
+- opencode-blog is now fully self-contained, no external skill dependencies required
 - Integration section updated to list companion skills as optional
 - Installer scripts updated for 13 sub-skills
 

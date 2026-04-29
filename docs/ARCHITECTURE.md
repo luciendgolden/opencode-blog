@@ -1,6 +1,6 @@
 # Architecture
 
-System design documentation for `claude-blog`, covering component types,
+System design documentation for `opencode-blog`, covering component types,
 data flow, scoring methodology, file conventions, and extension points.
 
 ---
@@ -67,14 +67,14 @@ The entry point for all `/blog` commands. Responsibilities:
 - Enforce quality gates (hard rules that never ship content violating them)
 - Load reference files on demand
 
-The orchestrator is a Claude Code skill with YAML frontmatter defining its
+The orchestrator is a OpenCode skill with YAML frontmatter defining its
 name, description, trigger phrases, and allowed tools.
 
 ### 2. Sub-Skills (12)
 
 **Location**: `skills/blog-*/SKILL.md`
 
-Each sub-skill is a standalone Claude Code skill with its own:
+Each sub-skill is a standalone OpenCode skill with its own:
 
 - YAML frontmatter (name, description, allowed-tools)
 - Detailed workflow (step-by-step instructions)
@@ -100,7 +100,7 @@ Each sub-skill is a standalone Claude Code skill with its own:
 
 **Location**: `agents/blog-*.md`
 
-Specialized agents spawned by sub-skills via Claude Code's `Task` tool.
+Specialized agents spawned by sub-skills via OpenCode's `Task` tool.
 Each agent has a focused role with a restricted tool set.
 
 | Agent | Tools | Role |
@@ -366,10 +366,10 @@ Platform detection affects:
 
 ## Installed Directory Tree
 
-After installation, `claude-blog` occupies this structure inside `~/.claude/`:
+After installation, `opencode-blog` occupies this structure inside `~/.config/opencode/`:
 
 ```
-~/.claude/
+~/.config/opencode/
 ├── skills/
 │   ├── blog/
 │   │   ├── SKILL.md                    # Main orchestrator

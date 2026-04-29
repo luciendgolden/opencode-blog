@@ -196,6 +196,6 @@ Server-side analysis of the **generated image itself**. Cannot be disabled throu
 - No native transparent backgrounds (workaround: prompt green background, then chromakey removal)
 - Text rendering quality varies - keep text under 25 characters for best results (Pro achieves 94% accuracy with quoted text)
 - Safety filters may block benign prompts - use auto-rephrase workflow
-- Session context resets between Claude Code conversations
+- Session context resets between OpenCode conversations
 - `imageSize` and thinking level depend on MCP package version support
 - No video generation (use Veo 3.1 for image-to-video workflows)

@@ -247,8 +247,8 @@ For `/blog image setup`:
 
 1. Run `python3 scripts/setup_image_mcp.py` (interactive)
    - Or: `python3 scripts/setup_image_mcp.py --key YOUR_KEY` (non-interactive)
-   - Writes to project `.mcp.json` by default
-   - Use `--global` flag for `~/.claude/settings.json`
+   - Writes to project `opencode.json` by default (under the `mcp` key)
+   - Use `--global` flag for `~/.config/opencode/opencode.json`
 2. Verify: `python3 scripts/validate_image_setup.py`
 3. Requires:
    - Node.js 18+ (npx)

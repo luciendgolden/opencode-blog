@@ -1,0 +1,47 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "permission": {
+    "skill": {
+      "blog*": "allow"
+    },
+    "edit": "allow",
+    "webfetch": "allow",
+    "bash": {
+      "*": "ask",
+      "python3 *": "allow",
+      "ls *": "allow",
+      "grep *": "allow",
+      "find *": "allow",
+      "wc *": "allow",
+      "git status*": "allow",
+      "git log*": "allow",
+      "git diff*": "allow",
+      "curl -sI*": "allow",
+      "curl -I*": "allow"
+    }
+  },
+  "agent": {
+    "blog": {
+      "permission": {
+        "task": {
+          "*": "deny",
+          "blog-*": "allow"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "nanobanana-mcp": {
+      "type": "local",
+      "command": ["npx", "-y", "@ycse/nanobanana-mcp"],
+      "enabled": true,
+      "environment": {
+        "GOOGLE_AI_API_KEY": "${GOOGLE_AI_API_KEY}",
+        "NANOBANANA_MODEL": "gemini-3.1-flash-image-preview"
+      }
+    }
+  }
+}

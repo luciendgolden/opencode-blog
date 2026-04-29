@@ -170,9 +170,9 @@ priority queue for optimization.
 The `analyze_blog.py` script provides automated metrics:
 
 ```bash
-python3 ~/.claude/skills/blog/scripts/analyze_blog.py post.md
-python3 ~/.claude/skills/blog/scripts/analyze_blog.py posts/ --batch
-python3 ~/.claude/skills/blog/scripts/analyze_blog.py post.md -o report.json
+python3 ~/.config/opencode/skills/blog/scripts/analyze_blog.py post.md
+python3 ~/.config/opencode/skills/blog/scripts/analyze_blog.py posts/ --batch
+python3 ~/.config/opencode/skills/blog/scripts/analyze_blog.py post.md -o report.json
 ```
 
 ### Related Commands

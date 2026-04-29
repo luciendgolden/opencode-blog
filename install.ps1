@@ -1,9 +1,9 @@
 #!/usr/bin/env pwsh
-# claude-blog installer for Windows
-# Installs the blog skill ecosystem to ~/.claude/skills/ and ~/.claude/agents/
+# opencode-blog installer for Windows
+# Installs the blog skill ecosystem to %USERPROFILE%\.config\opencode\{skills,agents,commands}.
 #
 # One-command install:
-#   iex (irm https://raw.githubusercontent.com/AgriciDaniel/claude-blog/main/install.ps1)
+#   iex (irm https://raw.githubusercontent.com/AgriciDaniel/opencode-blog/main/install.ps1)
 
 $ErrorActionPreference = "Stop"
 
@@ -14,24 +14,26 @@ function Write-Color($Color, $Text) {
 function Main {
     Write-Color Cyan @"
 
-   ╔══════════════════════════════════════╗
-   ║         claude-blog Installer        ║
-   ║  Blog Content Engine for Claude Code ║
-   ╚══════════════════════════════════════╝
+   ╔═════════════════════════════════════════╗
+   ║         opencode-blog Installer         ║
+   ║   Blog Content Engine for OpenCode      ║
+   ╚═════════════════════════════════════════╝
 
 "@
 
-    $SkillDir = Join-Path $env:USERPROFILE ".claude" "skills"
-    $AgentDir = Join-Path $env:USERPROFILE ".claude" "agents"
-    $TempDir = $null
+    $OpenCodeDir = Join-Path $env:USERPROFILE ".config" "opencode"
+    $SkillDir   = Join-Path $OpenCodeDir "skills"
+    $AgentDir   = Join-Path $OpenCodeDir "agents"
+    $CommandDir = Join-Path $OpenCodeDir "commands"
+    $TempDir    = $null
 
     # Determine source directory (local clone or piped from irm)
     if ($MyInvocation.MyCommand.Path -and (Test-Path (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "skills" "blog"))) {
         $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
     } else {
-        Write-Color White "Cloning claude-blog..."
-        $TempDir = Join-Path ([System.IO.Path]::GetTempPath()) "claude-blog-install-$([System.Guid]::NewGuid().ToString('N').Substring(0,8))"
-        git clone --depth 1 https://github.com/AgriciDaniel/claude-blog.git $TempDir 2>$null
+        Write-Color White "Cloning opencode-blog..."
+        $TempDir = Join-Path ([System.IO.Path]::GetTempPath()) "opencode-blog-install-$([System.Guid]::NewGuid().ToString('N').Substring(0,8))"
+        git clone --depth 1 https://github.com/AgriciDaniel/opencode-blog.git $TempDir 2>$null
         $ScriptDir = $TempDir
     }
 
@@ -49,12 +51,13 @@ function Main {
     # Create directories
     Write-Color White "Creating directories..."
     New-Item -ItemType Directory -Force -Path (Join-Path $SkillDir "blog" "references") | Out-Null
-    New-Item -ItemType Directory -Force -Path (Join-Path $SkillDir "blog" "templates") | Out-Null
-    New-Item -ItemType Directory -Force -Path (Join-Path $SkillDir "blog" "scripts") | Out-Null
-    New-Item -ItemType Directory -Force -Path $AgentDir | Out-Null
+    New-Item -ItemType Directory -Force -Path (Join-Path $SkillDir "blog" "templates")   | Out-Null
+    New-Item -ItemType Directory -Force -Path (Join-Path $SkillDir "blog" "scripts")     | Out-Null
+    New-Item -ItemType Directory -Force -Path $AgentDir   | Out-Null
+    New-Item -ItemType Directory -Force -Path $CommandDir | Out-Null
 
     # Copy main skill
-    Write-Color White "Installing main skill: blog..."
+    Write-Color White "Installing blog knowledge skill..."
     Copy-Item (Join-Path $ScriptDir "skills" "blog" "SKILL.md") (Join-Path $SkillDir "blog" "SKILL.md") -Force
 
     # Copy references
@@ -67,7 +70,7 @@ function Main {
         Copy-Item (Join-Path $ScriptDir "skills" "blog" "templates" "*.md") (Join-Path $SkillDir "blog" "templates") -Force
     }
 
-    # Copy sub-skills (auto-discovers all skill directories)
+    # Copy sub-skills
     Write-Color White "Installing sub-skills..."
     Get-ChildItem -Directory (Join-Path $ScriptDir "skills") | ForEach-Object {
         $skillName = $_.Name
@@ -75,14 +78,12 @@ function Main {
         $skillDst = Join-Path $SkillDir $skillName
         New-Item -ItemType Directory -Force -Path $skillDst | Out-Null
 
-        # Copy SKILL.md
         $src = Join-Path $_.FullName "SKILL.md"
         if (Test-Path $src) {
             Copy-Item $src (Join-Path $skillDst "SKILL.md") -Force
             Write-Color Green "  + $skillName"
         }
 
-        # Copy references/ if present
         $refSrc = Join-Path $_.FullName "references"
         if (Test-Path $refSrc) {
             $refDst = Join-Path $skillDst "references"
@@ -92,7 +93,6 @@ function Main {
             }
         }
 
-        # Copy scripts/ if present
         $scriptSrc = Join-Path $_.FullName "scripts"
         if (Test-Path $scriptSrc) {
             $scriptDst = Join-Path $skillDst "scripts"
@@ -101,20 +101,36 @@ function Main {
                 Copy-Item $_.FullName (Join-Path $scriptDst $_.Name) -Force
             }
         }
+
+        $assetsSrc = Join-Path $_.FullName "assets"
+        if (Test-Path $assetsSrc) {
+            $assetsDst = Join-Path $skillDst "assets"
+            New-Item -ItemType Directory -Force -Path $assetsDst | Out-Null
+            Copy-Item (Join-Path $assetsSrc "*") $assetsDst -Recurse -Force
+        }
     }
 
     # Create personas directory for blog-persona
     New-Item -ItemType Directory -Force -Path (Join-Path $SkillDir "blog" "references" "personas") | Out-Null
 
-    # Copy agents
+    # Copy agents (primary + subagents)
     Write-Color White "Installing agents..."
     Get-ChildItem -File (Join-Path $ScriptDir "agents" "*.md") | ForEach-Object {
         Copy-Item $_.FullName (Join-Path $AgentDir $_.Name) -Force
         Write-Color Green "  + $($_.BaseName)"
     }
 
-    # Copy scripts
-    Write-Color White "Installing scripts..."
+    # Copy commands
+    if (Test-Path (Join-Path $ScriptDir "commands")) {
+        Write-Color White "Installing slash commands..."
+        Get-ChildItem -File (Join-Path $ScriptDir "commands" "*.md") | ForEach-Object {
+            Copy-Item $_.FullName (Join-Path $CommandDir $_.Name) -Force
+            Write-Color Green "  + /$($_.BaseName)"
+        }
+    }
+
+    # Copy analyzer script
+    Write-Color White "Installing analyzer script..."
     Copy-Item (Join-Path $ScriptDir "scripts" "analyze_blog.py") (Join-Path $SkillDir "blog" "scripts" "analyze_blog.py") -Force
 
     # Install Python dependencies
@@ -129,7 +145,7 @@ function Main {
                 & python -m pip install --quiet -r $reqFile 2>$null
                 Write-Color Green "  Python dependencies installed."
             } catch {
-                Write-Color Yellow "  Skipped: Install manually with 'pip install -r requirements.txt'"
+                Write-Color Yellow "  Skipped: install manually with 'pip install -r requirements.txt'"
             }
         }
     }
@@ -142,45 +158,47 @@ function Main {
     # Summary
     Write-Color Cyan @"
 
-   ╔══════════════════════════════════════╗
-   ║       Installation Complete!         ║
-   ╚══════════════════════════════════════╝
+   ╔═════════════════════════════════════════╗
+   ║       Installation Complete!            ║
+   ╚═════════════════════════════════════════╝
 
 "@
 
-    Write-Color White "Installed:"
-    Write-Color Green "  Main skill:   blog/ (orchestrator + 14 references + 12 templates)"
-    Write-Color Green "  Sub-skills:   22 (21 commands + 1 internal)"
-    Write-Color Green "  Agents:       4 specialists"
-    Write-Color Green "  Scripts:      analyze_blog.py"
+    Write-Color White "Installed to $OpenCodeDir:"
+    Write-Color Green "  skills/blog/        Knowledge skill (refs + templates + analyzer)"
+    Write-Color Green "  skills/blog-*       21 sub-skills"
+    Write-Color Green "  agents/blog.md      Primary orchestrator"
+    Write-Color Green "  agents/blog-*       4 specialist subagents"
+    Write-Color Green "  commands/blog.md    /blog slash command"
     Write-Color White ""
-    Write-Color White "Commands available:"
-    Write-Color Cyan  "  /blog write <topic>        Write a new blog post"
-    Write-Color Cyan  "  /blog rewrite <file>       Optimize an existing blog post"
-    Write-Color Cyan  "  /blog analyze <file>       Audit blog quality (0-100 score)"
-    Write-Color Cyan  "  /blog brief <topic>        Generate a content brief"
-    Write-Color Cyan  "  /blog calendar             Generate an editorial calendar"
-    Write-Color Cyan  "  /blog strategy <niche>     Blog strategy and topic ideation"
-    Write-Color Cyan  "  /blog outline <topic>      Generate a SERP-informed outline"
-    Write-Color Cyan  "  /blog seo-check <file>     Post-writing SEO validation"
-    Write-Color Cyan  "  /blog schema <file>        Generate JSON-LD schema markup"
-    Write-Color Cyan  "  /blog repurpose <file>     Repurpose content for other platforms"
-    Write-Color Cyan  "  /blog geo <file>           AI citation optimization audit"
-    Write-Color Cyan  "  /blog image <idea>         AI image generation via Gemini"
-    Write-Color Cyan  "  /blog audit [directory]    Full-site blog health assessment"
-    Write-Color Cyan  "  /blog cannibalization      Detect keyword overlap across posts"
-    Write-Color Cyan  "  /blog factcheck            Verify statistics against sources"
-    Write-Color Cyan  "  /blog persona              Manage writing personas"
-    Write-Color Cyan  "  /blog taxonomy             Tag/category CMS management"
-    Write-Color Cyan  "  /blog notebooklm <query>   Query NotebookLM for research"
-    Write-Color Cyan  "  /blog audio <file>         Generate audio narration via Gemini TTS"
+    Write-Color White "Try in OpenCode TUI:"
+    Write-Color Cyan  "  /blog write <topic>          Write a new blog post"
+    Write-Color Cyan  "  /blog rewrite <file>         Optimize an existing post"
+    Write-Color Cyan  "  /blog analyze <file>         Quality audit (0-100)"
+    Write-Color Cyan  "  /blog brief <topic>          Content brief"
+    Write-Color Cyan  "  /blog calendar               Editorial calendar"
+    Write-Color Cyan  "  /blog strategy <niche>       Strategy + topic ideation"
+    Write-Color Cyan  "  /blog outline <topic>        SERP-informed outline"
+    Write-Color Cyan  "  /blog seo-check <file>       SEO validation"
+    Write-Color Cyan  "  /blog schema <file>          JSON-LD schema"
+    Write-Color Cyan  "  /blog repurpose <file>       Cross-platform repurposing"
+    Write-Color Cyan  "  /blog geo <file>             AI citation readiness audit"
+    Write-Color Cyan  "  /blog image <idea>           Gemini image generation"
+    Write-Color Cyan  "  /blog audit [directory]      Full-site assessment"
+    Write-Color Cyan  "  /blog cannibalization        Detect keyword overlap"
+    Write-Color Cyan  "  /blog factcheck              Verify statistics"
+    Write-Color Cyan  "  /blog persona                Manage personas"
+    Write-Color Cyan  "  /blog taxonomy               CMS taxonomy management"
+    Write-Color Cyan  "  /blog notebooklm <q>         NotebookLM research"
+    Write-Color Cyan  "  /blog audio <file>           Gemini TTS narration"
+    Write-Color Cyan  "  /blog google [cmd]           PSI/CrUX/GSC/GA4/NLP/YouTube/Keywords"
     Write-Color White ""
-    Write-Color White "Optional: AI Features (same API key for both)"
-    Write-Color Cyan  "  /blog image setup             Configure Gemini image generation"
-    Write-Color Cyan  "  /blog audio setup             Configure Gemini TTS audio narration"
-    Write-Color White "  Requires: Google AI API key (free at https://aistudio.google.com/apikey)"
+    Write-Color White "Optional: AI features need a free Google AI API key"
+    Write-Color Cyan  "  /blog image setup            Configure Gemini image generation"
+    Write-Color Cyan  "  /blog audio setup            Configure Gemini TTS"
+    Write-Color White "  Get your key:                https://aistudio.google.com/apikey"
     Write-Color White ""
-    Write-Color Yellow "Restart Claude Code to activate the new skill."
+    Write-Color Yellow "Restart OpenCode (or reload the TUI) to pick up the new skills."
 }
 
 Main

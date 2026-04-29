@@ -504,8 +504,9 @@ of the scoring rubric. The template ensures nothing is forgotten.
 
 ### Modifying an Existing Template
 
-Templates are editable markdown files in `~/.claude/skills/templates/`.
-Changes take effect immediately -- no restart needed.
+Templates are editable markdown files in
+`~/.config/opencode/skills/blog/templates/`. Changes take effect immediately
+-- no restart needed.
 
 1. Open the template file you want to modify
 2. Adjust section structure, word count targets, or marker placement
@@ -515,8 +516,8 @@ Changes take effect immediately -- no restart needed.
 
 1. Copy an existing template as a starting point:
    ```bash
-   cp ~/.claude/skills/templates/how-to-guide.md \
-      ~/.claude/skills/templates/my-custom-type.md
+   cp ~/.config/opencode/skills/blog/templates/how-to-guide.md \
+      ~/.config/opencode/skills/blog/templates/my-custom-type.md
    ```
 
 2. Define the section structure for your content type:

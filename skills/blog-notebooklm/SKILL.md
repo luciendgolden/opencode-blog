@@ -20,7 +20,7 @@ metadata:
 
 # Blog NotebookLM -- Source-Grounded Research from Your Documents
 
-Query Google NotebookLM notebooks directly from Claude Code for citation-backed
+Query Google NotebookLM notebooks directly from OpenCode for citation-backed
 answers from Gemini. Each question opens a headless browser session, retrieves
 the answer exclusively from your uploaded documents, and closes. Responses are
 Tier 1 quality (user's own primary sources) -- zero hallucination risk.
@@ -238,7 +238,7 @@ All data stored inside the skill directory:
 - Rate limits on free Google accounts (50 queries/day)
 - Manual upload required (user must add docs to NotebookLM web UI)
 - Browser overhead (few seconds per question for launch + teardown)
-- Local Claude Code only (not available in web UI)
+- Local OpenCode CLI/TUI only (not available in web UI)
 
 ## Reference Documentation
 

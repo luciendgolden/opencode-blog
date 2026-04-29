@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# claude-blog uninstaller
-# Cleanly removes all blog skills, agents, templates, and scripts
+# opencode-blog uninstaller
+# Cleanly removes all blog skills, agents, commands, and analyzer scripts.
 
 main() {
-    local SKILL_DIR="${HOME}/.claude/skills"
-    local AGENT_DIR="${HOME}/.claude/agents"
+    local OPENCODE_DIR="${HOME}/.config/opencode"
+    local SKILL_DIR="${OPENCODE_DIR}/skills"
+    local AGENT_DIR="${OPENCODE_DIR}/agents"
+    local COMMAND_DIR="${OPENCODE_DIR}/commands"
 
-    echo "=== Uninstalling claude-blog ==="
+    echo "=== Uninstalling opencode-blog ==="
     echo ""
 
     # Remove main skill (includes references, templates, scripts)
@@ -25,18 +27,24 @@ main() {
         fi
     done
 
-    # Remove agents
-    for agent in blog-researcher blog-writer blog-seo blog-reviewer; do
+    # Remove agents (primary + subagents)
+    for agent in blog blog-researcher blog-writer blog-seo blog-reviewer; do
         if [ -f "${AGENT_DIR}/${agent}.md" ]; then
             rm -f "${AGENT_DIR}/${agent}.md"
             echo "  Removed: ${AGENT_DIR}/${agent}.md"
         fi
     done
 
+    # Remove commands
+    if [ -f "${COMMAND_DIR}/blog.md" ]; then
+        rm -f "${COMMAND_DIR}/blog.md"
+        echo "  Removed: ${COMMAND_DIR}/blog.md"
+    fi
+
     echo ""
-    echo "=== claude-blog uninstalled ==="
+    echo "=== opencode-blog uninstalled ==="
     echo ""
-    echo "Restart Claude Code to complete removal."
+    echo "Restart OpenCode to complete removal."
 }
 
 main "$@"

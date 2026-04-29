@@ -1,17 +1,17 @@
 # Installation Guide
 
-This guide covers all installation methods for `claude-blog`, a Claude Code skill
-ecosystem for blog content creation, optimization, and management.
+This guide covers all installation methods for `opencode-blog`, an OpenCode
+skill pack for blog content creation, optimization, and management.
 
 ## Prerequisites
 
 | Requirement | Version | Purpose |
 |-------------|---------|---------|
-| [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) | Latest | Runtime for all `/blog` commands |
+| [OpenCode CLI](https://opencode.ai/docs/) | Latest | Runtime for all `/blog` commands |
 | Python | 3.11+ | Quality analysis script (`analyze_blog.py`) |
 | pip | Latest | Python dependency management |
 
-Claude Code must be installed and configured before installing `claude-blog`.
+OpenCode must be installed and configured before installing `opencode-blog`.
 Python is only required for the `analyze_blog.py` quality scoring script; all
 other commands work without it.
 
@@ -22,25 +22,25 @@ other commands work without it.
 ### Linux / macOS
 
 ```bash
-curl -sL https://raw.githubusercontent.com/AgriciDaniel/claude-blog/main/install.sh | bash
+curl -sL https://raw.githubusercontent.com/AgriciDaniel/opencode-blog/main/install.sh | bash
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-iex (irm https://raw.githubusercontent.com/AgriciDaniel/claude-blog/main/install.ps1)
+iex (irm https://raw.githubusercontent.com/AgriciDaniel/opencode-blog/main/install.ps1)
 ```
 
 Both installers automatically copy all skills, agents, references, templates,
-and scripts to the correct Claude Code configuration directories.
+and scripts to the correct OpenCode configuration directories.
 
 ---
 
 ## Standard Install (Git Clone)
 
 ```bash
-git clone https://github.com/AgriciDaniel/claude-blog.git
-cd claude-blog
+git clone https://github.com/AgriciDaniel/opencode-blog.git
+cd opencode-blog
 chmod +x install.sh
 ./install.sh
 ```
@@ -86,7 +86,7 @@ If you prefer not to run the installer, copy files to these paths manually.
 ### Directory Structure
 
 ```
-~/.claude/
+~/.config/opencode/
 ├── skills/
 │   ├── blog/
 │   │   ├── SKILL.md                          # Main orchestrator
@@ -133,44 +133,44 @@ If you prefer not to run the installer, copy files to these paths manually.
 
 ```bash
 # Create directories
-mkdir -p ~/.claude/skills/blog/{references,templates,scripts}
-mkdir -p ~/.claude/skills/blog-{write,rewrite,analyze,brief,calendar,strategy,outline,seo-check,schema,repurpose,geo,audit,chart,image}
-mkdir -p ~/.claude/skills/blog-image/{references,scripts}
-mkdir -p ~/.claude/agents
+mkdir -p ~/.config/opencode/skills/blog/{references,templates,scripts}
+mkdir -p ~/.config/opencode/skills/blog-{write,rewrite,analyze,brief,calendar,strategy,outline,seo-check,schema,repurpose,geo,audit,chart,image}
+mkdir -p ~/.config/opencode/skills/blog-image/{references,scripts}
+mkdir -p ~/.config/opencode/agents
 
 # Main skill
-cp skills/blog/SKILL.md ~/.claude/skills/blog/SKILL.md
+cp skills/blog/SKILL.md ~/.config/opencode/skills/blog/SKILL.md
 
 # References
-cp skills/blog/references/*.md ~/.claude/skills/blog/references/
+cp skills/blog/references/*.md ~/.config/opencode/skills/blog/references/
 
 # Templates
-cp skills/blog/templates/*.md ~/.claude/skills/blog/templates/
+cp skills/blog/templates/*.md ~/.config/opencode/skills/blog/templates/
 
 # Sub-skills
 for d in skills/blog-*/; do
     name=$(basename "$d")
-    cp "$d/SKILL.md" ~/.claude/skills/$name/SKILL.md
+    cp "$d/SKILL.md" ~/.config/opencode/skills/$name/SKILL.md
 done
 
 # Agents
-cp agents/*.md ~/.claude/agents/
+cp agents/*.md ~/.config/opencode/agents/
 
 # Scripts
-cp scripts/analyze_blog.py ~/.claude/skills/blog/scripts/
-chmod +x ~/.claude/skills/blog/scripts/analyze_blog.py
+cp scripts/analyze_blog.py ~/.config/opencode/skills/blog/scripts/
+chmod +x ~/.config/opencode/skills/blog/scripts/analyze_blog.py
 
 # Blog-image references and scripts
-cp skills/blog-image/references/*.md ~/.claude/skills/blog-image/references/
-cp skills/blog-image/scripts/*.py ~/.claude/skills/blog-image/scripts/
-chmod +x ~/.claude/skills/blog-image/scripts/*.py
+cp skills/blog-image/references/*.md ~/.config/opencode/skills/blog-image/references/
+cp skills/blog-image/scripts/*.py ~/.config/opencode/skills/blog-image/scripts/
+chmod +x ~/.config/opencode/skills/blog-image/scripts/*.py
 ```
 
 ---
 
 ## Optional: AI Image Generation
 
-`claude-blog` can generate custom blog images via Gemini AI (hero images, inline
+`opencode-blog` can generate custom blog images via Gemini AI (hero images, inline
 illustrations, social cards). This requires the nanobanana-mcp server and a free
 Google AI API key.
 
@@ -204,24 +204,24 @@ After installation, verify everything is in place:
 
 ```bash
 # Main skill
-ls ~/.claude/skills/blog/SKILL.md
+ls ~/.config/opencode/skills/blog/SKILL.md
 
 # Sub-skills (should list 14)
-ls ~/.claude/skills/blog-*/SKILL.md | wc -l
+ls ~/.config/opencode/skills/blog-*/SKILL.md | wc -l
 
 # Agents (should list 4)
-ls ~/.claude/agents/blog-*.md | wc -l
+ls ~/.config/opencode/agents/blog-*.md | wc -l
 
 # References (should list 5+)
-ls ~/.claude/skills/blog/references/*.md | wc -l
+ls ~/.config/opencode/skills/blog/references/*.md | wc -l
 
 # Python script
-ls ~/.claude/skills/blog/scripts/analyze_blog.py
+ls ~/.config/opencode/skills/blog/scripts/analyze_blog.py
 ```
 
-### 2. Restart Claude Code
+### 2. Restart OpenCode
 
-Close and reopen Claude Code (or restart the CLI) to load the new skills:
+Close and reopen OpenCode (or restart the CLI) to load the new skills:
 
 ```bash
 # If running in terminal, exit and relaunch
@@ -231,7 +231,7 @@ claude
 ### 3. Test a command
 
 ```bash
-# Inside Claude Code, run:
+# Inside OpenCode, run:
 /blog strategy "home automation"
 ```
 
@@ -241,7 +241,7 @@ begin gathering context about the niche.
 ### 4. Test the Python analysis script
 
 ```bash
-python3 ~/.claude/skills/blog/scripts/analyze_blog.py --help
+python3 ~/.config/opencode/skills/blog/scripts/analyze_blog.py --help
 ```
 
 Expected output:
@@ -268,13 +268,13 @@ options:
 Pull the latest changes and re-run the installer:
 
 ```bash
-cd claude-blog
+cd opencode-blog
 git pull
 ./install.sh
 ```
 
 The installer overwrites existing files, so updates are safe to run
-at any time. Restart Claude Code after updating.
+at any time. Restart OpenCode after updating.
 
 ---
 
@@ -283,23 +283,23 @@ at any time. Restart Claude Code after updating.
 ### Automated Uninstall (Unix)
 
 ```bash
-# From the claude-blog repository
+# From the opencode-blog repository
 chmod +x uninstall.sh
 ./uninstall.sh
 ```
 
 This removes:
 
-- `~/.claude/skills/blog/` (main skill, references, templates, scripts)
-- `~/.claude/skills/blog-*/` (all 14 sub-skills including blog-chart and blog-image)
-- `~/.claude/agents/blog-*.md` (all 4 agents)
+- `~/.config/opencode/skills/blog/` (main skill, references, templates, scripts)
+- `~/.config/opencode/skills/blog-*/` (all 14 sub-skills including blog-chart and blog-image)
+- `~/.config/opencode/agents/blog-*.md` (all 4 agents)
 
 ### Manual Uninstall
 
 ```bash
-rm -rf ~/.claude/skills/blog
-rm -rf ~/.claude/skills/blog-{write,rewrite,analyze,brief,calendar,strategy,outline,seo-check,schema,repurpose,geo,audit,chart,image}
-rm -f ~/.claude/agents/blog-{researcher,writer,seo,reviewer}.md
+rm -rf ~/.config/opencode/skills/blog
+rm -rf ~/.config/opencode/skills/blog-{write,rewrite,analyze,brief,calendar,strategy,outline,seo-check,schema,repurpose,geo,audit,chart,image}
+rm -f ~/.config/opencode/agents/blog-{researcher,writer,seo,reviewer}.md
 ```
 
 ### Clean Up Python Dependencies (Optional)
@@ -308,7 +308,7 @@ rm -f ~/.claude/agents/blog-{researcher,writer,seo,reviewer}.md
 pip uninstall textstat beautifulsoup4 lxml jsonschema
 ```
 
-Restart Claude Code after uninstalling to complete removal.
+Restart OpenCode after uninstalling to complete removal.
 
 ---
 
@@ -316,10 +316,10 @@ Restart Claude Code after uninstalling to complete removal.
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| `/blog` command not found | Claude Code not restarted | Close and reopen Claude Code |
+| `/blog` command not found | OpenCode not restarted | Close and reopen OpenCode |
 | `python3: command not found` | Python not installed or not in PATH | Install Python 3.11+ via your package manager |
 | `pip install` fails | Missing pip or wrong Python version | Run `python3 -m ensurepip --upgrade` |
 | Permission denied on `install.sh` | Script not executable | Run `chmod +x install.sh` |
-| Files not in `~/.claude/` | Wrong install location | Verify `$HOME` points to your home directory |
+| Files not in `~/.config/opencode/` | Wrong install location | Verify `$HOME` points to your home directory |
 
 For additional issues, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).

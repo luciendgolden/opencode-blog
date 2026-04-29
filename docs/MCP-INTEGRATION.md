@@ -1,10 +1,10 @@
 # MCP Integration Guide
 
 Optional Model Context Protocol (MCP) server integrations that extend
-`claude-blog` with live data from SEO platforms, analytics services, and
+`opencode-blog` with live data from SEO platforms, analytics services, and
 performance monitoring tools.
 
-**Important**: `claude-blog` works fully without any MCP servers. These
+**Important**: `opencode-blog` works fully without any MCP servers. These
 integrations are optional enhancements for teams that already use these
 platforms.
 
@@ -14,7 +14,7 @@ platforms.
 
 ```
                     +---------------------------+
-                    |      claude-blog          |
+                    |      opencode-blog          |
                     |    /blog commands          |
                     +------+----+----+----------+
                            |    |    |
@@ -83,7 +83,7 @@ python3 skills/blog-image/scripts/validate_image_setup.py
 
 ## DataForSEO MCP (Recommended)
 
-**DataForSEO is the recommended MCP integration for `claude-blog`.** It provides
+**DataForSEO is the recommended MCP integration for `opencode-blog`.** It provides
 a single unified API covering SERP data, keyword research, backlink analysis,
 on-page auditing, domain analytics, content analysis, and AI optimization,
 replacing the need for separate Ahrefs, Semrush, GSC, and PageSpeed integrations.
@@ -168,7 +168,7 @@ claude mcp add --transport http dataforseo https://mcp.dataforseo.com/http \
   --header "Authorization: Basic $(echo -n 'username:password' | base64)"
 ```
 
-**Or add to `~/.claude/settings.json` manually:**
+**Or add to `~/.config/opencode/opencode.json` manually:**
 
 ```json
 {
@@ -282,7 +282,7 @@ Freshness Update Queue (Data-Driven)
 
 ### Configuration
 
-Add the GSC MCP server to your Claude Code settings (`~/.claude/settings.json`):
+Add the GSC MCP server to your OpenCode settings (`~/.config/opencode/opencode.json`):
 
 ```json
 {
@@ -472,14 +472,14 @@ Your pages are accessible to AI crawlers (GPTBot, ClaudeBot, PerplexityBot).
 
 ## How to Configure MCP Servers
 
-MCP servers are configured in your Claude Code settings file. The location
+MCP servers are configured in your OpenCode settings file. The location
 depends on your setup:
 
 ### Settings File Location
 
 | Platform | Path |
 |----------|------|
-| Linux/macOS | `~/.claude/settings.json` |
+| Linux/macOS | `~/.config/opencode/opencode.json` |
 | Windows | `%USERPROFILE%\.claude\settings.json` |
 
 ### Adding an MCP Server
@@ -503,7 +503,7 @@ Edit `settings.json` to add MCP servers under the `mcpServers` key:
 ### Verifying MCP Connection
 
 After adding an MCP server:
-1. Restart Claude Code
+1. Restart OpenCode
 2. The MCP server should appear in available tools
 3. Test with a simple query related to the server's function
 
@@ -541,7 +541,7 @@ Then reference them in settings:
 
 ### Content Decay Detection (GSC + Blog Audit)
 
-Combine Google Search Console data with `claude-blog`'s quality scoring to
+Combine Google Search Console data with `opencode-blog`'s quality scoring to
 identify posts that need immediate attention:
 
 ```

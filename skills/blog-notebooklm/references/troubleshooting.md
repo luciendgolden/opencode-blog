@@ -136,8 +136,9 @@ python3 scripts/run.py notebook_manager.py list
 
 ## Common Questions
 
-**Q: Why doesn't this work in Claude web UI?**
-A: Requires local file system and browser access. Use Claude Code CLI only.
+**Q: Why doesn't this work in a hosted/web AI UI?**
+A: Requires local file system and browser access. Use the OpenCode CLI/TUI
+on your own machine.
 
 **Q: Can I use multiple Google accounts?**
 A: Yes, use `auth_manager.py reauth` to switch between accounts.
