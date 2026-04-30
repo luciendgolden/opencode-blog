@@ -1,14 +1,5 @@
 # opencode-blog — AI Blog Creation for OpenCode
 
-[![CI](https://github.com/AgriciDaniel/opencode-blog/actions/workflows/ci.yml/badge.svg)](https://github.com/AgriciDaniel/opencode-blog/actions/workflows/ci.yml)
-[![GitHub release](https://img.shields.io/github/v/release/AgriciDaniel/opencode-blog)](https://github.com/AgriciDaniel/opencode-blog/releases/latest)
-![OpenCode Skill Pack](https://img.shields.io/badge/OpenCode-Skill_Pack-blueviolet)
-![License: MIT](https://img.shields.io/badge/License-MIT-green)
-![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)
-![Sub-Skills](https://img.shields.io/badge/Sub--Skills-22-orange)
-
-> **Blog:** [See how opencode-blog works](https://agricidaniel.com/blog/opencode-blog-writer)
-
 `opencode-blog` is a blog content engine for [OpenCode](https://opencode.ai)
 that creates, optimizes, and manages content at scale. It generates complete
 articles, briefs, calendars, and schemas — dual-optimized for Google rankings
@@ -47,13 +38,13 @@ It ships as a self-contained pack of OpenCode primitives:
 **One-command install (Unix/macOS):**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/AgriciDaniel/opencode-blog/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/luciendgolden/opencode-blog/main/install.sh | bash
 ```
 
 **Or clone and install manually:**
 
 ```bash
-git clone https://github.com/AgriciDaniel/opencode-blog.git
+git clone https://github.com/luciendgolden/opencode-blog.git
 cd opencode-blog
 chmod +x install.sh && ./install.sh
 ```

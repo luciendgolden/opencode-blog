@@ -2,9 +2,10 @@
 description: >-
   Research specialist for blog content. Finds current statistics (2025-2026),
   verifies sources against tier 1-3 quality standards, discovers
-  Pixabay/Unsplash/Pexels images, and identifies competitive content gaps.
-  Invoked for statistic research, image discovery, and competitive analysis
-  during blog writing workflows.
+  Pixabay/Unsplash/Pexels images, evaluates image fit against the blog design
+  system, and identifies competitive content gaps. Invoked for statistic
+  research, image discovery, and competitive analysis during blog writing
+  workflows.
 mode: subagent
 temperature: 0.2
 tools:
@@ -12,16 +13,16 @@ tools:
   grep: true
   glob: true
   list: true
-  webfetch: true
-  websearch: true
   bash: true
+  tavily_*: true
+  webfetch: false
+  websearch: false
   write: false
   edit: false
 permission:
   edit: deny
-  webfetch: allow
   bash:
-    "*": ask
+    "*": deny
     "curl -sI*": allow
     "curl -s -I*": allow
     "curl -I*": allow
